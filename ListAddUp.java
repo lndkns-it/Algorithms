@@ -5,7 +5,7 @@ public class ListAddUp {
 
     public static void main(String[] args) {
         ArrayList<Integer> numbers = new ArrayList<Integer>(Arrays.asList(15, 10, 3, 7));
-        System.out.println(getAdditionElements(numbers, numbers.get(0), 17));
+        System.out.println(getAdditionElementsSecond(numbers, 17));
     }
 
     public static String getAdditionElements(ArrayList<Integer> numbers, Integer init, Integer k) {
@@ -22,6 +22,17 @@ public class ListAddUp {
             }
         }
         return "No elements to calculate k number";
+    }
+
+    public static Boolean getAdditionElementsSecond(ArrayList<Integer> numbers, Integer k) {
+        if(numbers.size() != 0) {
+            for(Integer number : numbers) {
+                if(numbers.contains(k - number)){
+                    return true;
+                } 
+            }
+        }
+        return false;
     }
 
 
