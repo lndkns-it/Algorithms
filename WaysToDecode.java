@@ -1,37 +1,27 @@
-import java.util.ArrayList;
-
 public class WaysToDecode {
     public static void main(String[] args) {
-        
+        String digits = "13126";
+        System.out.println(decode(digits.toCharArray(), digits.length()));
     }
 
-    public static void decode(Integer code) {
-        ArrayList<String> validPairs = new ArrayList<String>();
-        String number = code.toString();
-        Integer waysToDecode = 0;
-        for(int i = 0; i < number.length(); i++) {
-            Integer partial = Integer.parseInt(number.substring(i, i + 2));
-            if(partial <= 26) {
-                validPairs.add(partial.toString());
-                waysToDecode++;
-            }
+    public static int decode(char[] code, int n) {
+        Integer ways = 0;
+
+        if(n == 0 || n == 1)
+            return 1;
+
+        if(code[0] == '0')
+            return 0;
+
+        if(code[n - 2] == '1' || (code[n - 2] == '2' && code[n - 1] < '7')){
+            ways+= decode(code, n - 2);
         }
-
-        Integer arraySize = validPairs.size();
-        Integer cont = 0;
-
-        Integer calc = calculateWays(validPairs, arraySize, cont, number);
-    }
-
-    public static Integer calculateWays(ArrayList<String> validPairs, Integer arraySize, Integer cont, String number){
-        StringBuilder sb = new StringBuilder();
-
-        for(int i = 0; i < arraySize; i++) {
-            sb.append(validPairs.get(i));
-            if(sb.toString().length() <= number.length()) {
-                
-            }
+            
+        if(code[n - 1] > '0') {
+            ways+= decode(code, n - 1);
         }
-        return cont;
+    
+        return ways;
     }
+
 }
